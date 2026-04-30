@@ -4,7 +4,7 @@ public class EnemyStatus : MonoBehaviour, IShootable
 {
     [SerializeField] private GameObject _bloodEffect;
     [SerializeField] float _lifeMax = 2;
-    private float _currentLife;
+    [SerializeField] private float _currentLife;
     public void Hitted(float damage, Vector3 shootPoint)
     {
         _currentLife -= damage;
@@ -14,6 +14,7 @@ public class EnemyStatus : MonoBehaviour, IShootable
         if (_currentLife > 0)
             return;
 
+        print("Matou");
         Destroy(gameObject);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

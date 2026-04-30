@@ -43,10 +43,10 @@ public class GunSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float currentGunIndex = Input.GetAxis("Mouse ScrollWheel");
-        if (currentGunIndex != 0)
+        
+        if (Input.GetButtonDown("Switch"))
         {
-            ChangeWeapon(currentGunIndex);
+            ChangeWeapon();
         }
 
         if (Input.GetButtonDown("Reload"))
@@ -79,25 +79,12 @@ public class GunSystem : MonoBehaviour
         _shootTimer = 0;
     }
 
-    private void ChangeWeapon(float nextIndex)
+    private void ChangeWeapon()
     {
         if (_gunInventory.Guns.Count <= 1)
+            print("Funciona ksksks");
             return;
-
-        int currentIndex = _gunInventory.Guns.IndexOf(_handGun);
-        currentIndex += (int)Mathf.Sign(nextIndex);
-
-        if (currentIndex == _gunInventory.Guns.Count)
-        {
-            currentIndex = 0;
-        }
-        else if (currentIndex < 0)
-        {
-            currentIndex = _gunInventory.Guns.Count - 1;
-        }
-
-        _handGun = _gunInventory.Guns[currentIndex];
-        ChangeGunVisual();
+        //ChangeGunVisual();
     }
 
     IEnumerator Reload()
