@@ -4,15 +4,19 @@ using UnityEngine.AI;
 public class walkEnemy : MonoBehaviour
 {
     [SerializeField] private float _visionDistance = 3;
+    [SerializeField] private float _perceptionTime = 1.5f;
     [SerializeField] private Transform[] _pathPoints;
     private int _pathIndex = 0;
-    private float _perceptionTime = 2;
+    private float actualTime;
     private NavMeshAgent _agent;
-    private bool _chasing;
+    [HideInInspector] public bool _chasing;
+    [HideInInspector] public bool _canWalk = true;
 
 
     void Start()
     {
+        _canWalk = true;
+        actualTime = _perceptionTime;
         _agent = GetComponent<NavMeshAgent>();
         if(_pathPoints.Length > 1)
         {
@@ -22,46 +26,47 @@ public class walkEnemy : MonoBehaviour
 
     void Update()
     {
+        if (!_canWalk)
+            return;
+        Debug.Log("Start");
+        if (!_agent.pathPending && _agent.remainingDistance < 0.5f && !_chasing && _pathPoints.Length > 0)
         {
-            if (!_agent.pathPending && _agent.remainingDistance < 0.5f  &&!_chasing && _pathPoints.Length > 0)
+            _pathIndex++;
+            if (_pathIndex < _pathPoints.Length)
             {
-           
-                _pathIndex++;
-                if (_pathIndex < _pathPoints.Length)
-                {
-                    _agent.SetDestination(_pathPoints[_pathIndex].position);
-                }
-                else
-                {
-                    _pathIndex = 0;
-                }
+                _agent.SetDestination(_pathPoints[_pathIndex].position);
             }
-            _chasing = false;
-            Ray ray = new Ray(gameObject.transform.position,gameObject.transform.forward);
-            RaycastHit hit;
-
-            if (!Physics.Raycast(ray, out hit, _visionDistance))
-                return;
-            if (!hit.collider.CompareTag("Player"))
-                return;
-            _chasing = true;
-            _agent.SetDestination(hit.transform.position);
-            //_agent.remainingDistance 
-            gameObject.transform.LookAt(hit.transform.position); 
+            else
+            {
+                _pathIndex = 0;
+            }
         }
-    }
+        _chasing = false;
+        Ray ray = new Ray(gameObject.transform.position, gameObject.transform.forward);
+        RaycastHit hit;
 
-    private void OnTriggerEnter(Collider other)
+        if (!Physics.Raycast(ray, out hit, _visionDistance))
+            return;
+        if (!hit.collider.CompareTag("Player"))
+            return;
+        _chasing = true;
+        _agent.SetDestination(hit.transform.position);
+        //_agent.remainingDistance 
+        gameObject.transform.LookAt(hit.transform.position);
+    }
+    
+    private void OnTriggerStay(Collider other)
     {
-        float actualTime = _perceptionTime;
+        if (!_canWalk) 
+            return;
         if (!other.gameObject.CompareTag("Player"))
             return;
-        Debug.Log("player");
+
         actualTime -= Time.deltaTime ;
-        Debug.Log(actualTime);
         if (actualTime > 0)
             return;
-        Debug.Log("chasing");
+ 
+        _agent.SetDestination(other.transform.position);
         _chasing = true;
     }
 }
