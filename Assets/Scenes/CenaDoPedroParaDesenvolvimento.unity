@@ -151,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9deed098f89e2434eb03d3357b54117b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
-  _bloodEffect: {fileID: 0}
   _lifeMax: 2
   _currentLife: 0
 --- !u!136 &84439724
@@ -349,6 +348,64 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &894201337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 894201338}
+  - component: {fileID: 894201339}
+  m_Layer: 8
+  m_Name: hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &894201338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894201337}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.91, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1104330691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &894201339
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894201337}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.7263618, z: 1.5204506}
+  m_Center: {x: 0, y: 0.13473877, z: 1.172288}
+--- !u!4 &1104330691 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8348917120589473623, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+  m_PrefabInstance: {fileID: 1155174416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1155174416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -403,11 +460,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8348917120589473623, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 894201338}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4350579259333117303, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2116329341}
+    - targetCorrespondingSourceObject: {fileID: 4350579259333117303, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2116329343}
   m_SourcePrefab: {fileID: 100100000, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
 --- !u!1 &1281870881
 GameObject:
@@ -738,7 +801,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116329339}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c337d41b4ba649e47886cc94cb6a1b25, type: 3}
   m_Name: 
@@ -758,6 +821,19 @@ MonoBehaviour:
     _clipSize: 5
     _reloadTime: 3
     _hasScope: 0
+--- !u!114 &2116329343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116329339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1147c1a7f74080c44b8619bed47cc822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeeleWeapon
+  _hitbox: {fileID: 894201337}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

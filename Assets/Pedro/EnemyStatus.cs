@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour, IShootable
 {
-    [SerializeField] private GameObject _bloodEffect;
     [SerializeField] float _lifeMax = 2;
     [SerializeField] private float _currentLife;
     public void Hitted(float damage)
