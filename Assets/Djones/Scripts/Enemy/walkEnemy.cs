@@ -6,6 +6,7 @@ public class walkEnemy : MonoBehaviour
     [SerializeField] private float _visionDistance = 3;
     [SerializeField] private Transform[] _pathPoints;
     private int _pathIndex = 0;
+    private float _perceptionTime = 2;
     private NavMeshAgent _agent;
     private bool _chasing;
 
@@ -13,25 +14,25 @@ public class walkEnemy : MonoBehaviour
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-        Debug.Log("going");
-        _agent.SetDestination(_pathPoints[_pathIndex].position);
+        if(_pathPoints.Length > 1)
+        {
+            _agent.SetDestination(_pathPoints[_pathIndex].position);
+        }
     }
 
     void Update()
     {
         {
-            if (!_agent.pathPending && _agent.remainingDistance < 0.5f  &&!_chasing)
+            if (!_agent.pathPending && _agent.remainingDistance < 0.5f  &&!_chasing && _pathPoints.Length > 0)
             {
-                Debug.Log("start");
+           
                 _pathIndex++;
                 if (_pathIndex < _pathPoints.Length)
                 {
-                    Debug.Log("going");
                     _agent.SetDestination(_pathPoints[_pathIndex].position);
                 }
                 else
                 {
-                    Debug.Log("reset");
                     _pathIndex = 0;
                 }
             }
@@ -48,5 +49,19 @@ public class walkEnemy : MonoBehaviour
             //_agent.remainingDistance 
             gameObject.transform.LookAt(hit.transform.position); 
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        float actualTime = _perceptionTime;
+        if (!other.gameObject.CompareTag("Player"))
+            return;
+        Debug.Log("player");
+        actualTime -= Time.deltaTime ;
+        Debug.Log(actualTime);
+        if (actualTime > 0)
+            return;
+        Debug.Log("chasing");
+        _chasing = true;
     }
 }
