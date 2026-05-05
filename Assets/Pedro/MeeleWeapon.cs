@@ -20,7 +20,6 @@ public class MeeleWeapon : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && _isAttaking == false)
         {
-            print("atacou5");
             _isAttaking = true;
             _hitbox.SetActive(true);
             StartCoroutine(attackRate());
@@ -28,14 +27,11 @@ public class MeeleWeapon : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        print("ainda não talvez");
         if (!other.TryGetComponent(out IShootable target))
         return;
 
-        print("atacou2");
         target.Hitted(_meeleDamage);
         _hitbox.SetActive(false);
-        print("atacou");
     }
     IEnumerator attackRate()
     {
