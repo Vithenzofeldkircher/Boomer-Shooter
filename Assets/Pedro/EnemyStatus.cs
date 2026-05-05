@@ -5,12 +5,10 @@ public class EnemyStatus : MonoBehaviour, IShootable
     [SerializeField] private GameObject _bloodEffect;
     [SerializeField] float _lifeMax = 2;
     [SerializeField] private float _currentLife;
-    public void Hitted(float damage, Vector3 shootPoint)
+    public void Hitted(float damage)
     {
         _currentLife -= damage;
 
-        GameObject blood = Instantiate(_bloodEffect, shootPoint, Quaternion.LookRotation(shootPoint - transform.position));
-        blood.transform.SetParent(transform);
         if (_currentLife > 0)
             return;
 
