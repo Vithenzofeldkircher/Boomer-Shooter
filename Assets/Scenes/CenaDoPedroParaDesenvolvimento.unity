@@ -348,6 +348,81 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &728884254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 728884255}
+  - component: {fileID: 728884256}
+  - component: {fileID: 728884257}
+  m_Layer: 8
+  m_Name: MeeleCode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &728884255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728884254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 894201338}
+  m_Father: {fileID: 1104330691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &728884256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728884254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1147c1a7f74080c44b8619bed47cc822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeeleWeapon
+  _hitbox: {fileID: 894201337}
+  _meeleDamage: 1
+--- !u!54 &728884257
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728884254}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &894201337
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &894201338
 Transform:
   m_ObjectHideFlags: 0
@@ -373,12 +448,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894201337}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1104330691}
+  m_Father: {fileID: 728884255}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &894201339
 BoxCollider:
@@ -463,14 +538,11 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8348917120589473623, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 894201338}
+      addedObject: {fileID: 728884255}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4350579259333117303, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2116329341}
-    - targetCorrespondingSourceObject: {fileID: 4350579259333117303, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2116329343}
   m_SourcePrefab: {fileID: 100100000, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
 --- !u!1 &1281870881
 GameObject:
@@ -821,19 +893,6 @@ MonoBehaviour:
     _clipSize: 5
     _reloadTime: 3
     _hasScope: 0
---- !u!114 &2116329343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116329339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1147c1a7f74080c44b8619bed47cc822, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeeleWeapon
-  _hitbox: {fileID: 894201337}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
