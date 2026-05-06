@@ -31,28 +31,33 @@ public class EnemyAttack : MonoBehaviour
         {
             _canAttack = true;
         }  
-        if (_agent.remainingDistance > _attackDistance && _walkSystem._chasing == false)
+        if (_agent.remainingDistance > _attackDistance )
+            return;
+        if (!_walkSystem._chasing)
             return;
         if (!_canAttack)
             return;
-        PerformAttack();
+       StartCoroutine(PerformAttack());
     }
 
    IEnumerator PerformAttack()
     {
         _walkSystem._canWalk = false;
         _collider.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         _collider.SetActive(false);
-        _cooldown = _attackCooldown;
         _walkSystem._canWalk = true;
-        Debug.Log("attack");
+        _canAttack = false;
+        _cooldown = _attackCooldown;
+        print("atack");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.TryGetComponent(out IDamagebleEnemy player))
+        IDamagebleEnemy player = other.gameObject.GetComponentInChildren<IDamagebleEnemy>();
+        if (player == null)
             return;
         player.Hitted(_damagePerHit);
+        print("dano");
     }
 }

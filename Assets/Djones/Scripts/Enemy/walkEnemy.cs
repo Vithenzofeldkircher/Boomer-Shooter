@@ -15,7 +15,6 @@ public class walkEnemy : MonoBehaviour
 
     void Start()
     {
-        _canWalk = true;
         actualTime = _perceptionTime;
         _agent = GetComponent<NavMeshAgent>();
         if(_pathPoints.Length > 1)
@@ -26,11 +25,10 @@ public class walkEnemy : MonoBehaviour
 
     void Update()
     {
-        if (!_canWalk)
-            return;
         Debug.Log("Start");
         if (!_agent.pathPending && _agent.remainingDistance < 0.5f && !_chasing && _pathPoints.Length > 0)
         {
+
             _pathIndex++;
             if (_pathIndex < _pathPoints.Length)
             {
@@ -53,6 +51,7 @@ public class walkEnemy : MonoBehaviour
         _agent.SetDestination(hit.transform.position);
         //_agent.remainingDistance 
         gameObject.transform.LookAt(hit.transform.position);
+        _agent.isStopped = !_canWalk;
     }
     
     private void OnTriggerStay(Collider other)
