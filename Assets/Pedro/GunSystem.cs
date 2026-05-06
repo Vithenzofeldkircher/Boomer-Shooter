@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class GunInventory
 {
     [SerializeField] private List<GunElement> _guns;
+
 
     public List<GunElement> Guns { get => _guns; }
 
@@ -26,6 +28,8 @@ public class GunSystem : MonoBehaviour
 {
     [SerializeField] private GunInventory _gunInventory;
     [SerializeField] private Transform _handGunModelParent;
+    [SerializeField] private UnityEvent _switchWeapon;
+    [SerializeField] private UnityEvent _switchMeeleWeapon;
     private Transform _camera;
     [SerializeField] private GunElement _handGun;
     private float _shootTimer;
@@ -43,10 +47,10 @@ public class GunSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetButtonDown("Switch"))
+        float currentGunIndex = Input.GetAxis("Mouse ScrollWheel");
+        if (currentGunIndex != 0)
         {
-            ChangeWeapon();
+            ChangeWeapon(currentGunIndex);
         }
 
         if (Input.GetButtonDown("Reload"))
@@ -78,13 +82,25 @@ public class GunSystem : MonoBehaviour
         shootable.Hitted(_handGun.Damage);
         _shootTimer = 0;
     }
-
-    private void ChangeWeapon()
+    private void ChangeWeapon(float nextIndex)
     {
         if (_gunInventory.Guns.Count <= 1)
-            print("Funciona ksksks");
             return;
-        //ChangeGunVisual();
+
+        int currentIndex = _gunInventory.Guns.IndexOf(_handGun);
+        currentIndex += (int)Mathf.Sign(nextIndex);
+
+        if (currentIndex == _gunInventory.Guns.Count)
+        {
+            currentIndex = 0;
+        }
+        else if (currentIndex < 0)
+        {
+            currentIndex = _gunInventory.Guns.Count - 1;
+        }
+
+        _handGun = _gunInventory.Guns[currentIndex];
+        ChangeGunVisual();
     }
 
     IEnumerator Reload()
