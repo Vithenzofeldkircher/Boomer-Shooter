@@ -767,11 +767,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2085a06aab40f9644a28159a1067be5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::walkEnemy
-  _visionDistance: 20
-  _perceptionTime: 1.5
-  _pathPoints: []
-  _chasing: 0
-  _canWalk: 0
+  visionDistance: 5
+  pathPoints: []
+  pointReachDistance: 0.5
 --- !u!65 &1306491733
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -922,10 +920,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df32876b6d3db7e409dbf1d82f1ec626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
-  _attackCooldown: 2
-  _damagePerHit: 1
-  _attackDistance: 2
-  _collider: {fileID: 968777527}
+  attackCooldown: 1
+  damagePerHit: 10
+  attackDistance: 2
+  attackCollider: {fileID: 968777527}
 --- !u!1 &1850063549
 GameObject:
   m_ObjectHideFlags: 0
