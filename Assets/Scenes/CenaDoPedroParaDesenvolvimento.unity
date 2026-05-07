@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 84439723}
   m_Layer: 0
   m_Name: Dummy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9deed098f89e2434eb03d3357b54117b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
-  _lifeMax: 10
+  _lifeMax: 2
   _currentLife: 0
 --- !u!136 &84439724
 CapsuleCollider:
@@ -460,6 +460,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8689307690114612717, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
       insertIndex: 5
       addedObject: {fileID: 2122602066}
+    - targetCorrespondingSourceObject: {fileID: 8689307690114612717, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2122602072}
   m_SourcePrefab: {fileID: 100100000, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
 --- !u!1 &1460060412
 GameObject:
@@ -1080,6 +1083,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de49e8ea517bd7d4abcf693e4d5497b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractable
+--- !u!114 &2122602072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122602060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffd9fe194033aa4fb8fed8ebdd9d2d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Biblia
+  magic: {fileID: 4633861391036231327, guid: 73d3df3d9e6576d43beaa8af804be254, type: 3}
+  magicBornPlaceInSpace: {fileID: 1104330691}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
