@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c814a1ff3b5a8c14686e8b7eee853b5e
+guid: fe549c3ae3ca39d4f82ccae00eafc008
 PrefabImporter:
   externalObjects: {}
   userData: 
@@ -7,8 +7,8 @@ PrefabImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 255613
-  packageName: Minimalist Demon
+  productId: 241394
+  packageName: Fantasy Imp Creature
   packageVersion: 1.0
-  assetPath: Assets/Conquerror/Minimalist_Demon/Demon.prefab
-  uploadId: 600278
+  assetPath: Assets/Imp/Prefabs/Imp Brown.prefab
+  uploadId: 556736

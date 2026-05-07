@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8a7f14e0b951afc44839b7f02bb0d836
+guid: a91d12c6f361e514fb34ce91b806dac6
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
@@ -8,8 +8,8 @@ NativeFormatImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 255613
-  packageName: Minimalist Demon
+  productId: 241394
+  packageName: Fantasy Imp Creature
   packageVersion: 1.0
-  assetPath: Assets/Conquerror/Minimalist_Demon/ExampleScene/Silver.mat
-  uploadId: 600278
+  assetPath: Assets/Imp/Materials/Imp Red Material.mat
+  uploadId: 556736
