@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class MeeleWeapon : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class MeeleWeapon : MonoBehaviour
     [SerializeField] private GameObject _crossVisual;
     private bool _equipped = true;
     private bool _isAttaking = false;
+    public bool _isAnimation = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,6 +25,7 @@ public class MeeleWeapon : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && _isAttaking == false)
         {
             Debug.Log(animator);
+            _isAnimation = true;
             animator.SetBool("IsAttacking", true);
             _isAttaking = true;
             _hitbox.SetActive(true);
@@ -41,6 +44,10 @@ public class MeeleWeapon : MonoBehaviour
     {
         _equipped = true;
         _crossVisual.SetActive(true);
+        Vector3 pos = _crossVisual.transform.position;
+        _crossVisual.transform.position = pos;
+        pos.x = 0.45f;
+
     }
     public void Desequipped()
     {
@@ -51,6 +58,7 @@ public class MeeleWeapon : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         Debug.Log(animator);
+        _isAnimation = false;
         animator.SetBool("IsAttacking", false);
         _hitbox.SetActive(false);
         _isAttaking = false;

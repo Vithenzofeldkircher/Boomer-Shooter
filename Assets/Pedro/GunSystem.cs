@@ -29,11 +29,13 @@ public class GunSystem : MonoBehaviour
     [SerializeField] private GunInventory _gunInventory;
     [SerializeField] private Transform _handGunModelParent;
     [SerializeField] private UnityEvent _switchWeapon;
-    [SerializeField] private UnityEvent _switchMeeleWeapon;
+    [SerializeField] private UnityEvent _disactivateMeele;
+    [SerializeField] private UnityEvent _disactivateBiblia;
     private Transform _camera;
     [SerializeField] private GunElement _handGun;
     private float _shootTimer;
     private bool _isReloading;
+    private bool isHeald = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -50,6 +52,7 @@ public class GunSystem : MonoBehaviour
         float currentGunIndex = Input.GetAxis("Mouse ScrollWheel");
         if (currentGunIndex != 0)
         {
+            isHeald = true;
             ChangeWeapon(currentGunIndex);
         }
 
@@ -62,6 +65,8 @@ public class GunSystem : MonoBehaviour
         }
 
         _shootTimer += Time.deltaTime;
+        if (isHeald == false)
+            return;
         if (_isReloading)
             return;
         if (_shootTimer < _handGun.ShootRate)
@@ -130,5 +135,9 @@ public class GunSystem : MonoBehaviour
         GameObject gun = Instantiate(_handGun.GunModel, _handGunModelParent);
         gun.layer = LayerMask.NameToLayer("Gun");
         gun.transform.localPosition = new Vector3(0, 0, -gun.transform.localScale.z);
+    }
+    public void IsNotHeald()
+    {
+        isHeald = false;
     }
 }

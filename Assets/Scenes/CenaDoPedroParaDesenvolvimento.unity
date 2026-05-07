@@ -297,6 +297,7 @@ MonoBehaviour:
   _meeleDamage: 1
   animator: {fileID: 1680667349}
   _crossVisual: {fileID: 1680667345}
+  _isAnimation: 0
 --- !u!54 &728884257
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -661,6 +662,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1504298311}
+  - component: {fileID: 1504298312}
   m_Layer: 8
   m_Name: WeaponHolding
   m_TagString: Untagged
@@ -684,6 +686,97 @@ Transform:
   - {fileID: 1508086211}
   m_Father: {fileID: 1104330691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1504298312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504298310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c126c9f9c63e1304192b56a2c4320202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwitchWeaponSystem
+  toMeele:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 728884256}
+        m_TargetAssemblyTypeName: MeeleWeapon, Assembly-CSharp
+        m_MethodName: Equipped
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2122602072}
+        m_TargetAssemblyTypeName: Biblia, Assembly-CSharp
+        m_MethodName: IsNotCurrentWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2116329341}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: IsNotHeald
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  toBiblia:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2122602072}
+        m_TargetAssemblyTypeName: Biblia, Assembly-CSharp
+        m_MethodName: IsCurrentWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 728884256}
+        m_TargetAssemblyTypeName: MeeleWeapon, Assembly-CSharp
+        m_MethodName: Desequipped
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2116329341}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: IsNotHeald
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _meele: {fileID: 728884256}
 --- !u!1001 &1508086210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1053,7 +1146,10 @@ MonoBehaviour:
   _switchWeapon:
     m_PersistentCalls:
       m_Calls: []
-  _switchMeeleWeapon:
+  _disactivateMeele:
+    m_PersistentCalls:
+      m_Calls: []
+  _disactivateBiblia:
     m_PersistentCalls:
       m_Calls: []
   _handGun:
@@ -1068,6 +1164,11 @@ MonoBehaviour:
     _clipSize: 5
     _reloadTime: 3
     _hasScope: 0
+--- !u!4 &2116329342 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6389488198571268362, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+  m_PrefabInstance: {fileID: 1155174416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2122602060 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8689307690114612717, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
@@ -1098,7 +1199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Biblia
   magic: {fileID: 4633861391036231327, guid: 73d3df3d9e6576d43beaa8af804be254, type: 3}
-  magicBornPlaceInSpace: {fileID: 1104330691}
+  magicBornPlaceInSpace: {fileID: 2116329342}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

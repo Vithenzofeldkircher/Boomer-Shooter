@@ -19,7 +19,7 @@ public class PlayerInteractable : MonoBehaviour
             case "Gun":
                 _gunSystem.AddNewGun((GunElement)collectable.Collect());
                 break;
-            case "Ammo":
+            case "Biblia":
                 break;
             case "Armor":
                 break;
