@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Magic
   speed: 5
+  detectionRange: 10
   damage: 2
 --- !u!54 &3146899450751140851
 Rigidbody:
