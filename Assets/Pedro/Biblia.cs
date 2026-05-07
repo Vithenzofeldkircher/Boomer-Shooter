@@ -27,6 +27,7 @@ public class Biblia : MonoBehaviour
     }
     public void IsCurrentWeapon()
     {
+        collected = true;
         _isHeald = true;
     }
     public void IsNotCurrentWeapon()

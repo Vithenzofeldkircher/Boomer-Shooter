@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BibliaCollectable : MonoBehaviour
 {
     private Biblia biblia;
+    [SerializeField] private UnityEvent bibliaCollected;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,7 +20,7 @@ public class BibliaCollectable : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            biblia.collected = true;
+            bibliaCollected.Invoke();
             Destroy(gameObject);
         }
     }

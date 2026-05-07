@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 590932030}
   - component: {fileID: 590932029}
   m_Layer: 0
-  m_Name: GunThing (1)
+  m_Name: BibliaThing
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,6 +281,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef2e727c6f1d7b498f3b9be88ddad7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BibliaCollectable
+  bibliaCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2122602072}
+        m_TargetAssemblyTypeName: Biblia, Assembly-CSharp
+        m_MethodName: IsCurrentWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2116329341}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: IsNotHeald
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 728884256}
+        m_TargetAssemblyTypeName: MeeleWeapon, Assembly-CSharp
+        m_MethodName: Desequipped
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &590932030
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -440,6 +479,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 518598804555151587, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+      propertyPath: collected
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2060248572866184782, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
       propertyPath: animator
       value: 
@@ -964,6 +1007,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2116329341 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2067142414317192878, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+  m_PrefabInstance: {fileID: 1155174416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c337d41b4ba649e47886cc94cb6a1b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunSystem
 --- !u!114 &2122602072 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 518598804555151587, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}

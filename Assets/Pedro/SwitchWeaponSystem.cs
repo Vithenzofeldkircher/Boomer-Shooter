@@ -15,11 +15,13 @@ public class SwitchWeaponSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Switch") && _meele._isAnimation == false)
+        if (_meele._isAnimation == true)
+            return;
+        if (Input.GetButtonDown("Switch"))
         {
             toMeele.Invoke();
         }
-        else if (Input.GetButtonDown("Biblia") && _meele._isAnimation == false && _biblia.collected == true)
+        if (Input.GetButtonDown("Biblia") && _biblia.collected == true)
         {
             toBiblia.Invoke();
         }
