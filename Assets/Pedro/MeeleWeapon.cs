@@ -4,10 +4,11 @@ using UnityEngine;
 public class MeeleWeapon : MonoBehaviour
 {
     [SerializeField] private GameObject _hitbox;
-    [SerializeField] private int _meeleDamage = 1;
+    [SerializeField] private int _meeleDamage = 1; 
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject _crossVisual;
     private bool _equipped = true;
     private bool _isAttaking = false;
-    private IShootable _shootable;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,6 +22,8 @@ public class MeeleWeapon : MonoBehaviour
             return;
         if (Input.GetButtonDown("Fire1") && _isAttaking == false)
         {
+            Debug.Log(animator);
+            animator.SetBool("IsAttacking", true);
             _isAttaking = true;
             _hitbox.SetActive(true);
             StartCoroutine(attackRate());
@@ -37,14 +40,18 @@ public class MeeleWeapon : MonoBehaviour
     public void Equipped()
     {
         _equipped = true;
+        _crossVisual.SetActive(true);
     }
     public void Desequipped()
     {
         _equipped = false;
+        _crossVisual.SetActive(false);
     }
     IEnumerator attackRate()
     {
         yield return new WaitForSeconds(2);
+        Debug.Log(animator);
+        animator.SetBool("IsAttacking", false);
         _hitbox.SetActive(false);
         _isAttaking = false;
     }

@@ -295,6 +295,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeeleWeapon
   _hitbox: {fileID: 894201337}
   _meeleDamage: 1
+  animator: {fileID: 1680667349}
+  _crossVisual: {fileID: 1680667345}
 --- !u!54 &728884257
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -704,15 +706,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 164634306756718104, guid: ecf1699552741c04194652ea2278297d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.44000006
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 164634306756718104, guid: ecf1699552741c04194652ea2278297d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.08
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 164634306756718104, guid: ecf1699552741c04194652ea2278297d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.26999998
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 164634306756718104, guid: ecf1699552741c04194652ea2278297d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1040,7 +1042,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116329339}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c337d41b4ba649e47886cc94cb6a1b25, type: 3}
   m_Name: 
