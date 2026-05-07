@@ -6,6 +6,7 @@ public class SwitchWeaponSystem : MonoBehaviour
     [SerializeField] private UnityEvent toMeele;
     [SerializeField] private UnityEvent toBiblia;
     [SerializeField] private MeeleWeapon _meele;
+    private Biblia _biblia;
     void Start()
     {
 
@@ -18,7 +19,7 @@ public class SwitchWeaponSystem : MonoBehaviour
         {
             toMeele.Invoke();
         }
-        else if (Input.GetButtonDown("Biblia") && _meele._isAnimation == false)
+        else if (Input.GetButtonDown("Biblia") && _meele._isAnimation == false && _biblia.collected == true)
         {
             toBiblia.Invoke();
         }

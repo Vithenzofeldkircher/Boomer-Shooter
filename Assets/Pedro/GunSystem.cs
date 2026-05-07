@@ -28,7 +28,6 @@ public class GunSystem : MonoBehaviour
 {
     [SerializeField] private GunInventory _gunInventory;
     [SerializeField] private Transform _handGunModelParent;
-    [SerializeField] private UnityEvent _switchWeapon;
     [SerializeField] private UnityEvent _disactivateOtherWeapon;
     private Transform _camera;
     [SerializeField] private GunElement _handGun;

@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Biblia : MonoBehaviour
 {
-    [SerializeField] private GameObject magic;
-    [SerializeField] private Transform magicBornPlaceInSpace;
-    private bool isHeald = false;
+    [SerializeField] private GameObject _magic;
+    [SerializeField] private Transform _magicBornPlaceInSpace;
+    private bool _isHeald = false;
+    public bool collected = false;
     void Start()
     {
         
@@ -13,17 +14,23 @@ public class Biblia : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && isHeald == true)
+        if (collected == false)
+            return;
+
+        if (_isHeald == false)
+            return;
+
+        if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(magic, magicBornPlaceInSpace);
+            Instantiate(_magic, _magicBornPlaceInSpace);
         }
     }
     public void IsCurrentWeapon()
     {
-        isHeald = true;
+        _isHeald = true;
     }
     public void IsNotCurrentWeapon()
     {
-        isHeald = false;
+        _isHeald = false;
     }
 }
