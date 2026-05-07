@@ -29,8 +29,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] private GunInventory _gunInventory;
     [SerializeField] private Transform _handGunModelParent;
     [SerializeField] private UnityEvent _switchWeapon;
-    [SerializeField] private UnityEvent _disactivateMeele;
-    [SerializeField] private UnityEvent _disactivateBiblia;
+    [SerializeField] private UnityEvent _disactivateOtherWeapon;
     private Transform _camera;
     [SerializeField] private GunElement _handGun;
     private float _shootTimer;
@@ -53,6 +52,7 @@ public class GunSystem : MonoBehaviour
         if (currentGunIndex != 0)
         {
             isHeald = true;
+            _disactivateOtherWeapon.Invoke();
             ChangeWeapon(currentGunIndex);
         }
 
@@ -89,7 +89,7 @@ public class GunSystem : MonoBehaviour
     }
     private void ChangeWeapon(float nextIndex)
     {
-        if (_gunInventory.Guns.Count <= 1)
+        if (_gunInventory.Guns.Count < 1)
             return;
 
         int currentIndex = _gunInventory.Guns.IndexOf(_handGun);
