@@ -483,14 +483,6 @@ PrefabInstance:
       propertyPath: collected
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2060248572866184782, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1680667349}
-    - target: {fileID: 2060248572866184782, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
-      propertyPath: _crossVisual
-      value: 
-      objectReference: {fileID: 1680667345}
     - target: {fileID: 2067142414317192878, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
       propertyPath: _handGunModelParent
       value: 
@@ -757,16 +749,6 @@ Rigidbody:
 --- !u!4 &1504298311 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3584337795987507086, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
-  m_PrefabInstance: {fileID: 1155174416}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1680667345 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3133864977168106701, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
-  m_PrefabInstance: {fileID: 1155174416}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1680667349 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8513765337025346250, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
   m_PrefabInstance: {fileID: 1155174416}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1811466612

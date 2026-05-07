@@ -172,8 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeeleWeapon
   _hitbox: {fileID: 8811742883281023942}
   _meeleDamage: 1
-  animator: {fileID: 0}
-  _crossVisual: {fileID: 0}
+  animator: {fileID: 8513765337025346250}
+  _crossVisual: {fileID: 3133864977168106701}
   _isAnimation: 0
 --- !u!54 &1061933813718908377
 Rigidbody:
