@@ -1,71 +1,97 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class walkEnemy : MonoBehaviour
+public class WalkEnemy : MonoBehaviour
 {
-    [SerializeField] private float _visionDistance = 3;
-    [SerializeField] private float _perceptionTime = 1.5f;
-    [SerializeField] private Transform[] _pathPoints;
-    private int _pathIndex = 0;
-    private float actualTime;
-    private NavMeshAgent _agent;
-    [HideInInspector] public bool _chasing;
-    [HideInInspector] public bool _canWalk = true;
+    [Header("Vision")]
+    [SerializeField] private float visionDistance = 5f;
 
+    [Header("Patrol")]
+    [SerializeField] private Transform[] pathPoints;
+    [SerializeField] private float pointReachDistance = 0.5f;
 
-    void Start()
+    private NavMeshAgent agent;
+    private int currentPoint;
+
+    public bool IsChasing { get; private set; }
+    public bool CanWalk { get; set; } = true;
+
+    private Transform player;
+
+    private void Start()
     {
-        actualTime = _perceptionTime;
-        _agent = GetComponent<NavMeshAgent>();
-        if(_pathPoints.Length > 1)
+        agent = GetComponent<NavMeshAgent>();
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObj != null)
+            player = playerObj.transform;
+
+        GoToNextPoint();
+    }
+
+    private void Update()
+    {
+        if (!CanWalk)
         {
-            _agent.SetDestination(_pathPoints[_pathIndex].position);
+            agent.isStopped = true;
+            return;
+        }
+
+        agent.isStopped = false;
+        DetectPlayer();
+
+        if (IsChasing)
+        {
+            ChasePlayer();
+        }
+        else
+        {
+            Patrol();
         }
     }
 
-    void Update()
+    private void DetectPlayer()
     {
-        Debug.Log("Start");
-        if (!_agent.pathPending && _agent.remainingDistance < 0.5f && !_chasing && _pathPoints.Length > 0)
-        {
+        IsChasing = false;
+        if (player == null)
+            return;
 
-            _pathIndex++;
-            if (_pathIndex < _pathPoints.Length)
+        Vector3 direction = (player.position - transform.position).normalized;
+
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, visionDistance))
+        {
+            if (hit.collider.CompareTag("Player"))
             {
-                _agent.SetDestination(_pathPoints[_pathIndex].position);
-            }
-            else
-            {
-                _pathIndex = 0;
+                IsChasing = true;
             }
         }
-        _chasing = false;
-        Ray ray = new Ray(gameObject.transform.position, gameObject.transform.forward);
-        RaycastHit hit;
-
-        if (!Physics.Raycast(ray, out hit, _visionDistance))
-            return;
-        if (!hit.collider.CompareTag("Player"))
-            return;
-        _chasing = true;
-        _agent.SetDestination(hit.transform.position);
-        //_agent.remainingDistance 
-        gameObject.transform.LookAt(hit.transform.position);
-        _agent.isStopped = !_canWalk;
     }
-    
-    private void OnTriggerStay(Collider other)
+
+    private void ChasePlayer()
     {
-        if (!_canWalk) 
+        agent.SetDestination(player.position);
+    }
+
+    private void Patrol()
+    {
+        if (pathPoints.Length == 0)
             return;
-        if (!other.gameObject.CompareTag("Player"))
+        if (agent.pathPending)
             return;
 
-        actualTime -= Time.deltaTime ;
-        if (actualTime > 0)
+        if (agent.remainingDistance <= pointReachDistance)
+        {
+            GoToNextPoint();
+        }
+    }
+
+    private void GoToNextPoint()
+    {
+        if (pathPoints.Length == 0)
             return;
- 
-        _agent.SetDestination(other.transform.position);
-        _chasing = true;
+
+        agent.SetDestination(pathPoints[currentPoint].position);
+        currentPoint = (currentPoint + 1) % pathPoints.Length;
     }
 }

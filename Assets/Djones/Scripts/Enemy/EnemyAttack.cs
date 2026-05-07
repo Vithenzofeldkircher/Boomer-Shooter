@@ -1,63 +1,75 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+
 public class EnemyAttack : MonoBehaviour
 {
-    [SerializeField] private float _attackCooldown;
-    [SerializeField] private int _damagePerHit;
-    [SerializeField] private float _attackDistance;
-    private float _cooldown;
-    private NavMeshAgent _agent;
-    [SerializeField] private GameObject _collider;
-    private walkEnemy _walkSystem;
-    private bool _canAttack;
-    void Start()
+    [Header("Attack")]
+    [SerializeField] private float attackCooldown = 1f;
+    [SerializeField] private int damagePerHit = 10;
+    [SerializeField] private float attackDistance = 2f;
+
+    [Header("References")]
+    [SerializeField] private GameObject attackCollider;
+
+    private NavMeshAgent agent;
+    private WalkEnemy walkEnemy;
+
+    private bool canAttack = true;
+    private bool isAttacking;
+
+    private void Start()
     {
-        _collider.GetComponent<BoxCollider>();
-        _agent = GetComponentInParent<NavMeshAgent>();
-        _walkSystem = GetComponentInParent<walkEnemy>();
-        _collider.SetActive(false);
-        _cooldown = _attackCooldown;
+        agent = GetComponentInParent<NavMeshAgent>();
+        walkEnemy = GetComponentInParent<WalkEnemy>();
+
+        attackCollider.SetActive(false);
     }
 
-    
-    void Update()
+    private void Update()
     {
-        if (_cooldown > 0)
-        {
-            _cooldown -= Time.deltaTime;
-        }
-        else
-        {
-            _canAttack = true;
-        }  
-        if (_agent.remainingDistance > _attackDistance )
+        if (!walkEnemy.IsChasing)
             return;
-        if (!_walkSystem._chasing)
+
+        if (agent.remainingDistance > attackDistance)
             return;
-        if (!_canAttack)
+
+        if (!canAttack || isAttacking)
             return;
-       StartCoroutine(PerformAttack());
+
+        StartCoroutine(PerformAttack());
     }
 
-   IEnumerator PerformAttack()
+    private IEnumerator PerformAttack()
     {
-        _walkSystem._canWalk = false;
-        _collider.SetActive(true);
+        isAttacking = true;
+        canAttack = false;
+
+        walkEnemy.CanWalk = false;
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        attackCollider.SetActive(true);
+
         yield return new WaitForSeconds(0.1f);
-        _collider.SetActive(false);
-        _walkSystem._canWalk = true;
-        _canAttack = false;
-        _cooldown = _attackCooldown;
-        print("atack");
+
+        attackCollider.SetActive(false);
+        walkEnemy.CanWalk = true;
+        agent.isStopped = false;
+
+        yield return new WaitForSeconds(attackCooldown);
+
+        canAttack = true;
+        isAttacking = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamagebleEnemy player = other.gameObject.GetComponentInChildren<IDamagebleEnemy>();
-        if (player == null)
+        IDamagebleEnemy target =
+            other.GetComponent<IDamagebleEnemy>();
+
+        if (target == null)
             return;
-        player.Hitted(_damagePerHit);
-        print("dano");
+
+        target.Hitted(damagePerHit);
     }
 }
