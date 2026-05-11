@@ -2,44 +2,59 @@ using UnityEngine;
 
 public class Menu_Maneger : MonoBehaviour
 {
-    //Uma condição para chamar o panel com as opçoes
     [Header("Configuração")]
-    public GameObject Panel_Menu;
-    public bool Menu_Button_Press = false;
+    public GameObject Panel_Menu; // Arraste seu painel aqui no Inspector
+    private bool menuAberto = false;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // Garante que o menu comece fechado e o mouse preso no início do jogo
+        if (Panel_Menu != null) Panel_Menu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Verifica se apertou o botão configurado (Esc)
         if (Input.GetButtonDown("Menu"))
         {
-            Menu_Button_Press = !Menu_Button_Press;
-            print("botão acionado"); // testar se ele ta reconhecendo o botão
-
-            if(Panel_Menu != null)
-            {
-                Panel_Menu.SetActive(Menu_Button_Press);
-            }
-
-            if (Menu_Button_Press)
-            {
-                Cursor.lockState = CursorLockMode.None; // destrava o cursos
-                Cursor.visible = true;
-                Time.timeScale = 0;
-            }
-
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked; // trava o cursos
-                Cursor.visible = false;
-                Time.timeScale = 1;
-            }
+            AlternarMenu();
         }
+    }
+
+    public void AlternarMenu()
+    {
+        menuAberto = !menuAberto; // O "!" inverte o valor (Toggle)
+
+        if (Panel_Menu != null)
+        {
+            Panel_Menu.SetActive(menuAberto);
+        }
+
+        if (menuAberto)
+        {
+            // Abriu o Menu: Para o tempo e libera o mouse
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            // Fechou o Menu: Volta o tempo e esconde o mouse
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+    public void SairDoJogo()
+    {
+        Debug.Log("Saindo");
+        Application.Quit();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // Fecha no Editor
+#endif
     }
 }
