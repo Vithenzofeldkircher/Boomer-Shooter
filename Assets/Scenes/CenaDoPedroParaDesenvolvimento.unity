@@ -567,7 +567,7 @@ MonoBehaviour:
     OnReload:
       m_PersistentCalls:
         m_Calls: []
-    _gunModel: {fileID: 0}
+    _gunModel: {fileID: 3780343292552658807, guid: 76bf01b8dcfc53947985cbe588d15075, type: 3}
     _name: Pistol
     _damage: 2
     _shootRate: 1.1
@@ -720,7 +720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3133864977168106701, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4350579259333117303, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
       propertyPath: m_Name
@@ -791,7 +791,7 @@ GameObject:
   - component: {fileID: 1168420034}
   - component: {fileID: 1168420033}
   m_Layer: 0
-  m_Name: GunPistolThing (1)
+  m_Name: SniperThing
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

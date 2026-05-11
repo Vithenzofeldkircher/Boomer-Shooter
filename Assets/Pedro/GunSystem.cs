@@ -81,22 +81,26 @@ public class GunSystem : MonoBehaviour
             _handGun.OnReload.Invoke();
         }
 
-        if (_virtualCamera == null)
-            return;
+        if (_handGun.HasScope == true)
+        {
+            if (_virtualCamera == null)
+                return;
 
-        bool isScoping = Input.GetMouseButton(1);
+            bool isScoping = Input.GetMouseButton(1);
 
-        float targetFov = isScoping ? _scopeFov : _normalFov;
+            float targetFov = isScoping ? _scopeFov : _normalFov;
 
-        var lens = _virtualCamera.m_Lens;
+            var lens = _virtualCamera.m_Lens;
 
-        lens.FieldOfView = Mathf.Lerp(
-            lens.FieldOfView,
-            targetFov,
-            _scopeSpeed * Time.deltaTime
-        );
+            lens.FieldOfView = Mathf.Lerp(
+                lens.FieldOfView,
+                targetFov,
+                _scopeSpeed * Time.deltaTime
+            );
 
-        _virtualCamera.m_Lens = lens;
+            _virtualCamera.m_Lens = lens;
+        }
+
         _shootTimer += Time.deltaTime;
 
         if (_isReloading)
@@ -175,8 +179,7 @@ public class GunSystem : MonoBehaviour
 
     public void ChangeGunVisual()
     {
-        /*
-        Destroy(_handGunModelParent.GetChild(0).gameObject);
+        Destroy(_handGunModelParent.GetChild(1).gameObject);
 
         GameObject gun = Instantiate(_handGun.GunModel, _handGunModelParent);
 
@@ -184,6 +187,5 @@ public class GunSystem : MonoBehaviour
 
         gun.transform.localPosition =
             new Vector3(0, 0, -gun.transform.localScale.z);
-        */
     }
 }
