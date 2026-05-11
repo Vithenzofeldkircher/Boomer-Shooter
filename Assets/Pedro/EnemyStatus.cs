@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyStatus : MonoBehaviour, IShootable
 {
     [SerializeField] float _lifeMax = 2;
-    [SerializeField] private float _currentLife;
+     private float _currentLife;
     public void Hitted(float damage)
     {
         _currentLife -= damage;

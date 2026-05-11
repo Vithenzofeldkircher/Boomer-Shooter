@@ -3,65 +3,103 @@ using UnityEngine;
 public class FlyingEnemy : MonoBehaviour
 {
     [Header("Configuração de Movimento")]
-    public float speed = 5f;            // Velocidade de movimento
-    public float stoppingDistance = 6f; // Distância mínima do player
-    public float maxRange = 30f;        // Distância maxima que o inimigo persegue o player
+    public float speed = 5f;
+    public float stoppingDistance = 6f;
+    public float maxRange = 30f;
 
     [Header("Configuração de Ataque")]
-    public float attackCooldown = 5f; 
-    public float timeUntilAttack = 1f;
+    public float attackCooldown = 5f;
 
     public Transform firePoint;
-    private Transform player;
-
     public GameObject projectilePrefab;
 
-    bool canShoot = true;
+    private Transform player;
+    private Animator animator;
+
+    private bool canShoot = true;
+    private float currentCooldown;
+
     void Start()
     {
-        // Acha o player pela tag
+        animator = GetComponent<Animator>();
+
+        // Procura o player pela tag
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
         if (playerObj != null)
+        {
             player = playerObj.transform;
+        }
+
+        currentCooldown = attackCooldown;
     }
 
     void Update()
     {
         if (player == null) return;
+
+        // Controle do cooldown
         if (!canShoot)
         {
-            attackCooldown -= Time.deltaTime * timeUntilAttack;
-            if (attackCooldown <= 0)
+            currentCooldown -= Time.deltaTime;
+
+            if (currentCooldown <= 0f)
             {
                 canShoot = true;
-                attackCooldown = 5f;
+                currentCooldown = attackCooldown;
             }
-
         }
-        // Segue o player no ar
 
+        // Distância até o player
         float distance = Vector3.Distance(transform.position, player.position);
+
+        // Player dentro do alcance
         if (distance <= maxRange)
         {
+            animator.SetBool("Chasing", true);
+
+            // Seguir player
             if (distance > stoppingDistance)
             {
-                Vector3 direction = (player.position - transform.position).normalized;
-                transform.position += direction * speed * Time.deltaTime;
-                transform.LookAt(player); // Faz olhar pro player
-            }
+                animator.SetBool("Attacking", false);
 
-            else if (distance <= stoppingDistance)
+                Vector3 direction = (player.position - transform.position).normalized;
+
+                transform.position += direction * speed * Time.deltaTime;
+
+                transform.LookAt(player);
+            }
+            // Atacar player
+            else
             {
-                if (projectilePrefab != null && player != null && canShoot  )
+                transform.LookAt(player);
+
+                if (projectilePrefab != null && canShoot)
                 {
-                    GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-                    Vector3 direction = (player.position - firePoint.position).normalized;
-                    projectile.GetComponent<Projectile>().Initialize(direction);
-                    transform.LookAt(player);
+                    animator.SetBool("Chasing", false);
+                    animator.SetBool("Attacking", true);
+
+                    GameObject projectile = Instantiate(
+                        projectilePrefab,
+                        firePoint.position,
+                        Quaternion.identity
+                    );
+
+                    Vector3 direction =
+                        (player.position - firePoint.position).normalized;
+
+                    projectile
+                        .GetComponent<Projectile>()
+                        .Initialize(direction);
+
                     canShoot = false;
                 }
-
             }
+        }
+        else
+        {
+            animator.SetBool("Chasing", false);
+            animator.SetBool("Attacking", false);
         }
     }
 }
