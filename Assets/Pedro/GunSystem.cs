@@ -24,7 +24,7 @@ public class GunInventory
     }
 }
 
-public class GunSystem : MonoBehaviour
+public class GunSystem : MonoBehaviour, IActiveGun
 {
     [SerializeField] private GunInventory _gunInventory;
     [SerializeField] private Transform _handGunModelParent;
@@ -33,7 +33,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] private GunElement _handGun;
     private float _shootTimer;
     private bool _isReloading;
-    private bool isHeald = false;
+    private bool isHeald = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,7 +41,6 @@ public class GunSystem : MonoBehaviour
         _handGun.Initialize();
         _shootTimer = _handGun.ShootRate;
         _handGun.OnReload.AddListener(() => StartCoroutine(Reload()));
-        _gunInventory.AddWeapon(_handGun);
     }
 
     // Update is called once per frame
@@ -104,7 +103,7 @@ public class GunSystem : MonoBehaviour
         }
 
         _handGun = _gunInventory.Guns[currentIndex];
-        ChangeGunVisual();
+        //ChangeGunVisual();
     }
 
     IEnumerator Reload()
@@ -130,13 +129,25 @@ public class GunSystem : MonoBehaviour
     }
     public void ChangeGunVisual()
     {
-        Destroy(_handGunModelParent.GetChild(0).gameObject);
-        GameObject gun = Instantiate(_handGun.GunModel, _handGunModelParent);
-        gun.layer = LayerMask.NameToLayer("Gun");
-        gun.transform.localPosition = new Vector3(0, 0, -gun.transform.localScale.z);
+        //Destroy(_handGunModelParent.GetChild(0).gameObject);
+        //GameObject gun = Instantiate(_handGun.GunModel, _handGunModelParent);
+        //gun.layer = LayerMask.NameToLayer("Gun");
+        //gun.transform.localPosition = new Vector3(0, 0, -gun.transform.localScale.z);
     }
     public void IsNotHeald()
     {
         isHeald = false;
+    }
+
+    public bool IsHolding(bool isHolding = false)
+    {
+        if (isHolding == true)
+            return isHolding == false;
+
+        if(isHolding == false) 
+            return true;
+
+        isHeald = isHolding;
+        return isHolding;
     }
 }

@@ -467,12 +467,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _gunModel: {fileID: 0}
-    _name: Demoniac Pistol
-    _damage: 1
-    _shootRate: 1
-    _ammunation: 999
-    _clipSize: 5
-    _reloadTime: 3
+    _name: "Don\xB4t Exist"
+    _damage: 0
+    _shootRate: 0
+    _ammunation: 0
+    _clipSize: 0
+    _reloadTime: 0
     _hasScope: 0
 --- !u!1 &8487786717507476700
 GameObject:
