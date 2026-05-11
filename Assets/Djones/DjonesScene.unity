@@ -256,9 +256,10 @@ MonoBehaviour:
   thinkRate: 0.5
   laser: {fileID: 1058621700}
   laserPoint: {fileID: 1058621699}
-  laserDuration: 3
+  laserDuration: 2
   laserCooldown: 10
-  rotationSpeed: 3
+  rotationSpeed: 2
+  bloodEffect: {fileID: 6823200998282874702, guid: 8f8fe12323625f5499b2853dd2ad3e58, type: 3}
 --- !u!95 &181141125
 Animator:
   serializedVersion: 7
@@ -294,7 +295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
   _lifeMax: 2
-  _currentLife: 0
 --- !u!1 &217421243
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,7 +779,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
   _lifeMax: 2
-  _currentLife: 2
 --- !u!1 &444438937
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,27 +3,29 @@ using System.Collections;
 
 public class BossController : MonoBehaviour
 {
-    public GameObject projectilePrefab;
+    [SerializeField] private GameObject projectilePrefab;
 
-    public Transform firePointLeft;
-    public Transform firePointRight;
+    [SerializeField] private Transform firePointLeft;
+    [SerializeField] private     Transform firePointRight;
 
-    public float attackRange = 40f;
+    [SerializeField] private float attackRange = 40f;
 
     [Range(0f, 100f)]
-    public float attackChance = 30f;
+    [SerializeField] private float attackChance = 30f;
 
-    public float thinkRate = 0.5f;
+    [SerializeField] private float thinkRate = 0.5f;
 
-    public LineRenderer laser;
+    [SerializeField] private LineRenderer laser;
 
-    public Transform laserPoint;
+    [SerializeField] private Transform laserPoint;
 
-    public float laserDuration = 3f;
+    [SerializeField] private float laserDuration = 3f;
 
-    public float laserCooldown = 10f;
+    [SerializeField] private float laserCooldown = 10f;
 
-    public float rotationSpeed = 3f;
+    [SerializeField] private float rotationSpeed = 3f;
+
+    [SerializeField] private GameObject bloodEffect;
 
     private Transform player;
     private Animator animator;
@@ -196,8 +198,8 @@ public class BossController : MonoBehaviour
                 100f))
             {
                 laser.SetPosition(0, laserPoint.position);
-
                 laser.SetPosition(1, hit.point);
+                GameObject blood = Instantiate(bloodEffect,laserPoint.position, Quaternion.LookRotation(laserPoint.position - transform.position));
 
                 if (hit.collider.CompareTag("Player"))
                 {
