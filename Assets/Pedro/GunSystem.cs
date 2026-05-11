@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Unity.Cinemachine;
 
 [System.Serializable]
 public class GunInventory
@@ -24,33 +25,51 @@ public class GunInventory
     }
 }
 
-public class GunSystem : MonoBehaviour, IActiveGun
+public class GunSystem : MonoBehaviour
 {
+    [Header("Inventory")]
     [SerializeField] private GunInventory _gunInventory;
+
+    [Header("Weapon")]
     [SerializeField] private Transform _handGunModelParent;
-    [SerializeField] private UnityEvent _disactivateOtherWeapon;
-    private Transform _camera;
     [SerializeField] private GunElement _handGun;
+
+    [Header("Events")]
+    [SerializeField] private UnityEvent _disactivateOtherWeapon;
+
+    [Header("Scope")]
+    [SerializeField] private CinemachineVirtualCamera _virtualCamera;
+    private float _normalFov;
+    [SerializeField] private float _scopeFov = 10f;
+    [SerializeField] private float _scopeSpeed = 10f;
+
+    private Transform _camera;
+
     private float _shootTimer;
+
     private bool _isReloading;
-    private bool isHeald = true;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         _camera = Camera.main.transform;
+
+        _normalFov = _virtualCamera.m_Lens.FieldOfView;
+
         _handGun.Initialize();
+
         _shootTimer = _handGun.ShootRate;
+
         _handGun.OnReload.AddListener(() => StartCoroutine(Reload()));
     }
 
-    // Update is called once per frame
     void Update()
     {
         float currentGunIndex = Input.GetAxis("Mouse ScrollWheel");
+
         if (currentGunIndex != 0)
         {
-            isHeald = true;
             _disactivateOtherWeapon.Invoke();
+
             ChangeWeapon(currentGunIndex);
         }
 
@@ -62,27 +81,45 @@ public class GunSystem : MonoBehaviour, IActiveGun
             _handGun.OnReload.Invoke();
         }
 
-        _shootTimer += Time.deltaTime;
-        if (isHeald == false)
+        if (_virtualCamera == null)
             return;
+
+        bool isScoping = Input.GetMouseButton(1);
+
+        float targetFov = isScoping ? _scopeFov : _normalFov;
+
+        var lens = _virtualCamera.m_Lens;
+
+        lens.FieldOfView = Mathf.Lerp(
+            lens.FieldOfView,
+            targetFov,
+            _scopeSpeed * Time.deltaTime
+        );
+
+        _virtualCamera.m_Lens = lens;
+        _shootTimer += Time.deltaTime;
+
         if (_isReloading)
             return;
+
         if (_shootTimer < _handGun.ShootRate)
             return;
-        //Verifica se o player atirou
+
         if (!Input.GetButtonDown("Fire1"))
             return;
-        if (!_handGun.UseAmmunation())//Se não tiver munição, não é possível atirar
+        Debug.Log("Atirando");
+
+        if (!_handGun.UseAmmunation())
             return;
-        //Verifica se o player acertou algo
+
         if (!Physics.Raycast(_camera.position, _camera.forward, out RaycastHit target))
             return;
-        //Verifica se o objeto acertado implementa IShootable
+
         if (!target.collider.TryGetComponent(out IShootable shootable))
             return;
 
-        //Aciona o método do contrato IShootable
         shootable.Hitted(_handGun.Damage);
+
         _shootTimer = 0;
     }
     private void ChangeWeapon(float nextIndex)
@@ -91,6 +128,7 @@ public class GunSystem : MonoBehaviour, IActiveGun
             return;
 
         int currentIndex = _gunInventory.Guns.IndexOf(_handGun);
+
         currentIndex += (int)Mathf.Sign(nextIndex);
 
         if (currentIndex == _gunInventory.Guns.Count)
@@ -103,51 +141,49 @@ public class GunSystem : MonoBehaviour, IActiveGun
         }
 
         _handGun = _gunInventory.Guns[currentIndex];
-        //ChangeGunVisual();
+
+        ChangeGunVisual();
     }
 
     IEnumerator Reload()
     {
         _isReloading = true;
-        //Trava até ser verdadeiro
-        //yield return new WaitUntil(() => _handGun.Ammunation > 0);
-        //Trava enquanto for verdadeiro
-        //yield return new WaitWhile(() => _handGun.Ammunation <= 0);
+
         yield return new WaitForSeconds(_handGun.ReloadTime);
+
         _handGun.Reload();
-        _shootTimer = _handGun.ShootRate;//Deixa a arma já pronta para atirar
+
+        _shootTimer = _handGun.ShootRate;
+
         _isReloading = false;
     }
+
     public void AddNewGun(GunElement newGun)
     {
         _handGun = newGun;
+
         _handGun.Initialize();
+
         _shootTimer = _handGun.ShootRate;
+
         _handGun.OnReload.AddListener(() => StartCoroutine(Reload()));
+
         _gunInventory.AddWeapon(newGun);
+
         ChangeGunVisual();
     }
+
     public void ChangeGunVisual()
     {
-        //Destroy(_handGunModelParent.GetChild(0).gameObject);
-        //GameObject gun = Instantiate(_handGun.GunModel, _handGunModelParent);
-        //gun.layer = LayerMask.NameToLayer("Gun");
-        //gun.transform.localPosition = new Vector3(0, 0, -gun.transform.localScale.z);
-    }
-    public void IsNotHeald()
-    {
-        isHeald = false;
-    }
+        /*
+        Destroy(_handGunModelParent.GetChild(0).gameObject);
 
-    public bool IsHolding(bool isHolding = false)
-    {
-        if (isHolding == true)
-            return isHolding == false;
+        GameObject gun = Instantiate(_handGun.GunModel, _handGunModelParent);
 
-        if(isHolding == false) 
-            return true;
+        gun.layer = LayerMask.NameToLayer("Gun");
 
-        isHeald = isHolding;
-        return isHolding;
+        gun.transform.localPosition =
+            new Vector3(0, 0, -gun.transform.localScale.z);
+        */
     }
 }

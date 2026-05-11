@@ -435,6 +435,18 @@ MonoBehaviour:
   _gunInventory:
     _guns: []
   _handGunModelParent: {fileID: 3584337795987507086}
+  _handGun:
+    OnReload:
+      m_PersistentCalls:
+        m_Calls: []
+    _gunModel: {fileID: 0}
+    _name: "Don\xB4t Exist"
+    _damage: 0
+    _shootRate: 0
+    _ammunation: 0
+    _clipSize: 0
+    _reloadTime: 0
+    _hasScope: 0
   _disactivateOtherWeapon:
     m_PersistentCalls:
       m_Calls:
@@ -462,18 +474,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _handGun:
-    OnReload:
-      m_PersistentCalls:
-        m_Calls: []
-    _gunModel: {fileID: 0}
-    _name: "Don\xB4t Exist"
-    _damage: 0
-    _shootRate: 0
-    _ammunation: 0
-    _clipSize: 0
-    _reloadTime: 0
-    _hasScope: 0
+  _playerCamera: {fileID: 2407043422488221813}
+  _normalFov: 60
+  _scopeFov: 25
+  _scopeSpeed: 10
 --- !u!1 &8487786717507476700
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +836,11 @@ PrefabInstance:
 --- !u!4 &2407043422488221810 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+  m_PrefabInstance: {fileID: 6746235317524637584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &2407043422488221813 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 9005220659476430821, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
   m_PrefabInstance: {fileID: 6746235317524637584}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2407043422488221815 stripped
