@@ -55,6 +55,8 @@ public class GunSystem : MonoBehaviour
 
     private bool _isReloading;
 
+    private bool _isScopable = false;
+
     void Start()
     {
         _camera = Camera.main.transform;
@@ -77,6 +79,7 @@ public class GunSystem : MonoBehaviour
         if (currentGunIndex != 0)
         {
             _disactivateOtherWeapon.Invoke();
+            _isScopable = true;
             ChangeWeapon(currentGunIndex);
         }
 
@@ -88,7 +91,7 @@ public class GunSystem : MonoBehaviour
             _handGun.OnReload.Invoke();
         }
 
-        if (_handGun.HasScope == true)
+        if (_handGun.HasScope == true && _isScopable == true)
         {
             if (_virtualCamera == null)
                 return;
@@ -208,10 +211,12 @@ public class GunSystem : MonoBehaviour
     public void EnableShoot()
     {
         _canShoot = true;
-    }
+        _isScopable = true;
+}
     public void DisableShoot()
     {
         _canShoot = false;
+        _isScopable = false;
         if (_handGunModelParent.childCount > 0)
         {
             Destroy(_handGunModelParent.GetChild(0).gameObject);

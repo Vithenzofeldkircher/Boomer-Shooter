@@ -2799,6 +2799,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7233355286381660974, guid: 3318a0dcc90627d4394e56a36f632ee6, type: 3}
   m_PrefabInstance: {fileID: 323263495}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &325434585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4350579259333117303, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+  m_PrefabInstance: {fileID: 1506158493}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &333383338 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 340629419560121753, guid: 8d99185e17570a34980db737d1eb4cfd, type: 3}
@@ -4208,10 +4213,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8584442848934694536, guid: 81c8b0c368006d4418f98362ca095340, type: 3}
-      propertyPath: _attributes._gunModel
-      value: 
-      objectReference: {fileID: 1265648731171219934, guid: c84de87f5f320dd438cf57556eb4c6a7, type: 3}
     - target: {fileID: 8584442848934694536, guid: 81c8b0c368006d4418f98362ca095340, type: 3}
       propertyPath: _eventToWeaponToDisapear.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6391,7 +6392,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2067142414317192878, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
   m_PrefabInstance: {fileID: 1506158493}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 325434585}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c337d41b4ba649e47886cc94cb6a1b25, type: 3}
@@ -13548,6 +13549,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.375
       objectReference: {fileID: 0}
+    - target: {fileID: 2067142414317192878, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+      propertyPath: _disactivaScope.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2067142414317192878, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+      propertyPath: _disactivaScope.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 325434585}
+    - target: {fileID: 2067142414317192878, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
+      propertyPath: _disactivaScope.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3133864977168106701, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -19382,6 +19395,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3222755707583733411, guid: d77e3e216f2a63f448af0cb902041b1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574748364642620242, guid: d77e3e216f2a63f448af0cb902041b1b, type: 3}
+      propertyPath: _attributes._name
+      value: ada
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574748364642620242, guid: d77e3e216f2a63f448af0cb902041b1b, type: 3}
+      propertyPath: _attributes._hasScope
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5574748364642620242, guid: d77e3e216f2a63f448af0cb902041b1b, type: 3}

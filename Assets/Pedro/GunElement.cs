@@ -76,12 +76,16 @@ public class GunElement : Element
         _ammunationClip += ammunationToReload;
         _ammunation -= ammunationToReload;
     }
+    public void SCOPEDISACTIVEEE()
+    {
+        _hasScope = false;
+    }
 
     public string Name { get => _name; }
     public float Damage { get => _damage; }
     public float ShootRate { get => _shootRate; }
     public float Ammunation { get => _ammunation; }
     public float ReloadTime { get => _reloadTime; }
-    public bool HasScope { get => _hasScope; }
+    public bool HasScope { get => _hasScope; set => _hasScope = value; }
     public GameObject GunModel { get => _gunModel; }
 }
