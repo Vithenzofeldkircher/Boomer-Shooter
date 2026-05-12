@@ -39,6 +39,10 @@ public class GunSystem : MonoBehaviour
 
     [Header("Scope")]
     [SerializeField] private CinemachineVirtualCamera _virtualCamera;
+
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _shootSound;
+
     private float _normalFov;
     [SerializeField] private float _scopeFov = 10f;
     [SerializeField] private float _scopeSpeed = 10f;
@@ -47,11 +51,15 @@ public class GunSystem : MonoBehaviour
 
     private float _shootTimer;
 
+    private bool _canShoot;
+
     private bool _isReloading;
 
     void Start()
     {
         _camera = Camera.main.transform;
+
+        _canShoot = false;
 
         _normalFov = _virtualCamera.m_Lens.FieldOfView;
 
@@ -69,7 +77,6 @@ public class GunSystem : MonoBehaviour
         if (currentGunIndex != 0)
         {
             _disactivateOtherWeapon.Invoke();
-
             ChangeWeapon(currentGunIndex);
         }
 
@@ -103,6 +110,9 @@ public class GunSystem : MonoBehaviour
 
         _shootTimer += Time.deltaTime;
 
+        if (!_canShoot)
+            return;
+
         if (_isReloading)
             return;
 
@@ -111,7 +121,11 @@ public class GunSystem : MonoBehaviour
 
         if (!Input.GetButtonDown("Fire1"))
             return;
-        Debug.Log("Atirando");
+
+        if (_audioSource != null && _shootSound != null)
+        {
+            _audioSource.PlayOneShot(_shootSound);
+        }
 
         if (!_handGun.UseAmmunation())
             return;
@@ -179,7 +193,10 @@ public class GunSystem : MonoBehaviour
 
     public void ChangeGunVisual()
     {
-        Destroy(_handGunModelParent.GetChild(1).gameObject);
+        if (_handGunModelParent.childCount > 1)
+        {
+            Destroy(_handGunModelParent.GetChild(1).gameObject);
+        }
 
         GameObject gun = Instantiate(_handGun.GunModel, _handGunModelParent);
 
@@ -187,5 +204,13 @@ public class GunSystem : MonoBehaviour
 
         gun.transform.localPosition =
             new Vector3(0, 0, -gun.transform.localScale.z);
+    }
+    public void EnableShoot()
+    {
+        _canShoot = true;
+    }
+    public void DisableShoot()
+    {
+        _canShoot = false;
     }
 }

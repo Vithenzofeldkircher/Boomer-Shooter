@@ -55,6 +55,9 @@ public class MeeleWeapon : MonoBehaviour
         _equipped = false;
         _crossVisual.SetActive(false);
         //_meeleCode.SetActive(false);
+        Vector3 pos = _crossVisual.transform.position;
+        _crossVisual.transform.position = pos;
+        pos.x = 0.45f;
     }
     IEnumerator attackRate()
     {

@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &903762 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1837300289464323389, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
-  m_PrefabInstance: {fileID: 1155174416}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &84439722
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +591,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2116329341}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: EnableShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &972664325
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -702,10 +703,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2067142414317192878, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
-      propertyPath: _virtualCamera
-      value: 
-      objectReference: {fileID: 903762}
     - target: {fileID: 2407043422488221810, guid: 1f60f0238e07c164686369ee7a1ce019, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -896,6 +893,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2116329341}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: EnableShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1168420036
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1052,6 +1061,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2122602072}
         m_TargetAssemblyTypeName: Biblia, Assembly-CSharp
         m_MethodName: IsNotCurrentWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2116329341}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: EnableShoot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
