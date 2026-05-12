@@ -9,6 +9,7 @@ public class WalkEnemy : MonoBehaviour
     [Header("Patrol")]
     [SerializeField] private Transform[] pathPoints;
     [SerializeField] private float pointReachDistance = 0.5f;
+    [SerializeField] private float damage = 1;
 
     private NavMeshAgent agent;
     private int currentPoint;
@@ -21,7 +22,6 @@ public class WalkEnemy : MonoBehaviour
 
     private void Start()
     {
-
         agent = GetComponent<NavMeshAgent>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -36,10 +36,8 @@ public class WalkEnemy : MonoBehaviour
     {
         if (!CanWalk)
         {
-
             agent.isStopped = true;
             return;
-            
         }
 
         agent.isStopped = false;
@@ -88,7 +86,6 @@ public class WalkEnemy : MonoBehaviour
         if (agent.remainingDistance <= pointReachDistance)
         {
             GoToNextPoint();
- 
         }
     }
 
@@ -99,5 +96,12 @@ public class WalkEnemy : MonoBehaviour
 
         agent.SetDestination(pathPoints[currentPoint].position);
         currentPoint = (currentPoint + 1) % pathPoints.Length;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.TryGetComponent(out IStatusPlayer player))
+            return;
+
+        player.DamagePlayer(damage);
     }
 }

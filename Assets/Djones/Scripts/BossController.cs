@@ -27,6 +27,7 @@ public class BossController : MonoBehaviour
 
     [SerializeField] private GameObject bloodEffect;
 
+    [SerializeField] private Transform pointBloodEffect;
     private Transform player;
     private Animator animator;
 
@@ -163,7 +164,7 @@ public class BossController : MonoBehaviour
         usingLaser = true;
 
         animator.SetTrigger("ChargeLaser");
-
+        GameObject blood = Instantiate(bloodEffect, pointBloodEffect.position, Quaternion.LookRotation(pointBloodEffect.position - transform.position));
         Vector3 laserDirection =
             (player.position - laserPoint.position).normalized;
 
@@ -175,7 +176,9 @@ public class BossController : MonoBehaviour
 
         laserDirection.Normalize();
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.8f);
+
+        GameObject blood2 = Instantiate(bloodEffect, pointBloodEffect.position, Quaternion.LookRotation(pointBloodEffect.position - transform.position));
 
         animator.SetTrigger("Laser");
 
@@ -185,6 +188,7 @@ public class BossController : MonoBehaviour
 
         while (timer < laserDuration)
         {
+            GameObject blood3 = Instantiate(bloodEffect, pointBloodEffect.position, Quaternion.LookRotation(pointBloodEffect.position - transform.position));
             timer += Time.deltaTime;
 
             RaycastHit hit;
@@ -197,7 +201,6 @@ public class BossController : MonoBehaviour
             {
                 laser.SetPosition(0, laserPoint.position);
                 laser.SetPosition(1, hit.point);
-                GameObject blood = Instantiate(bloodEffect,laserPoint.position, Quaternion.LookRotation(laserPoint.position - transform.position));
 
 
                 IStatusPlayer player = hit.collider.GetComponentInParent<IStatusPlayer>();
