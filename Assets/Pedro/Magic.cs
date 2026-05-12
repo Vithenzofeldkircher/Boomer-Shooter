@@ -22,7 +22,11 @@ public class Magic : MonoBehaviour
 
     void Update()
     {
-        if (enemy == null) return;
+        if (enemy == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         float distance = Vector3.Distance(transform.position, enemy.position);
 
@@ -34,6 +38,10 @@ public class Magic : MonoBehaviour
                 enemy.position,
                 speed * Time.deltaTime
             );
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter(Collider other)
