@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MeeleWeapon : MonoBehaviour
 {
@@ -45,19 +46,12 @@ public class MeeleWeapon : MonoBehaviour
         _equipped = true;
         _crossVisual.SetActive(true);
         //_meeleCode.SetActive(true);
-        Vector3 pos = _crossVisual.transform.position;
-        _crossVisual.transform.position = pos;
-        pos.x = 0.45f;
-
     }
     public void Desequipped()
     {
         _equipped = false;
         _crossVisual.SetActive(false);
         //_meeleCode.SetActive(false);
-        Vector3 pos = _crossVisual.transform.position;
-        _crossVisual.transform.position = pos;
-        pos.x = 0.45f;
     }
     IEnumerator attackRate()
     {

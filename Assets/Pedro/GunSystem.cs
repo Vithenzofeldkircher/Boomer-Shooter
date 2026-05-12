@@ -99,8 +99,6 @@ public class GunSystem : MonoBehaviour
 
         if (currentGunIndex != 0)
         {
-            _disactivateOtherWeapon.Invoke();
-            
             _isScopable = true;
             ChangeWeapon(currentGunIndex);
             ResetFOV();
@@ -148,8 +146,10 @@ public class GunSystem : MonoBehaviour
     }
     private void ChangeWeapon(float nextIndex)
     {
-        if (_gunInventory.Guns.Count < 1)
+        if (_gunInventory.Guns.Count <= 0)
             return;
+
+        _disactivateOtherWeapon.Invoke();
 
         int currentIndex = _gunInventory.Guns.IndexOf(_handGun);
 

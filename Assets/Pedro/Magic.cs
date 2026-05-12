@@ -10,6 +10,7 @@ public class Magic : MonoBehaviour
 
     void Start()
     {
+        transform.SetParent(null);
         StartCoroutine(MagicTimeOfLife());
         // Procura o player pela tag
         GameObject enemyObj = GameObject.FindGameObjectWithTag("Enemy");
