@@ -16,13 +16,12 @@ public class WalkEnemy : MonoBehaviour
     public bool IsChasing { get; private set; }
     public bool CanWalk { get; set; } = true;
 
-    private Animator _animator;
 
     private Transform player;
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
+
         agent = GetComponent<NavMeshAgent>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -37,7 +36,7 @@ public class WalkEnemy : MonoBehaviour
     {
         if (!CanWalk)
         {
-            _animator.SetBool("walking", false);
+
             agent.isStopped = true;
             return;
             
@@ -75,7 +74,7 @@ public class WalkEnemy : MonoBehaviour
 
     private void ChasePlayer()
     {
-        _animator.SetBool("walking", true);
+
         agent.SetDestination(player.position);
     }
 
@@ -89,7 +88,7 @@ public class WalkEnemy : MonoBehaviour
         if (agent.remainingDistance <= pointReachDistance)
         {
             GoToNextPoint();
-            _animator.SetBool("walking", true);
+ 
         }
     }
 
