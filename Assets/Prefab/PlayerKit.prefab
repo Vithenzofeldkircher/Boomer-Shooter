@@ -1054,7 +1054,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Biblia
   _magic: {fileID: 4633861391036231327, guid: 73d3df3d9e6576d43beaa8af804be254, type: 3}
   _magicBornPlaceInSpace: {fileID: 8348917120589473623}
+  detectionRange: 10
   collected: 0
+  _isEnemyClose: 0
 --- !u!1001 &6746235317524637584
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -57,6 +57,8 @@ public class GunSystem : MonoBehaviour
 
     private bool _isScopable = false;
 
+    private bool _isScoping = false;
+
     void Start()
     {
         _camera = Camera.main.transform;
@@ -74,23 +76,6 @@ public class GunSystem : MonoBehaviour
 
     void Update()
     {
-        float currentGunIndex = Input.GetAxis("Mouse ScrollWheel");
-
-        if (currentGunIndex != 0)
-        {
-            _disactivateOtherWeapon.Invoke();
-            _isScopable = true;
-            ChangeWeapon(currentGunIndex);
-        }
-
-        if (Input.GetButtonDown("Reload"))
-        {
-            if (_handGun.Ammunation <= 0)
-                return;
-
-            _handGun.OnReload.Invoke();
-        }
-
         if (_handGun.HasScope == true && _isScopable == true)
         {
             if (_virtualCamera == null)
@@ -109,6 +94,24 @@ public class GunSystem : MonoBehaviour
             );
 
             _virtualCamera.m_Lens = lens;
+        }
+        float currentGunIndex = Input.GetAxis("Mouse ScrollWheel");
+
+        if (currentGunIndex != 0)
+        {
+            _disactivateOtherWeapon.Invoke();
+            
+            _isScopable = true;
+            ChangeWeapon(currentGunIndex);
+            ResetFOV();
+        }
+
+        if (Input.GetButtonDown("Reload"))
+        {
+            if (_handGun.Ammunation <= 0)
+                return;
+
+            _handGun.OnReload.Invoke();
         }
 
         _shootTimer += Time.deltaTime;
@@ -208,15 +211,29 @@ public class GunSystem : MonoBehaviour
         gun.transform.localPosition =
             new Vector3(0, 0, -gun.transform.localScale.z);
     }
+    void ResetFOV()
+    {
+        if (_virtualCamera == null) return;
+
+        var lens = _virtualCamera.m_Lens;
+        lens.FieldOfView = _normalFov;
+        _virtualCamera.m_Lens = lens;
+
+        _isScoping = false;
+    }
+
     public void EnableShoot()
     {
         _canShoot = true;
         _isScopable = true;
-}
+        ResetFOV();
+    }
+
     public void DisableShoot()
     {
         _canShoot = false;
         _isScopable = false;
+        ResetFOV();
         if (_handGunModelParent.childCount > 0)
         {
             Destroy(_handGunModelParent.GetChild(0).gameObject);
