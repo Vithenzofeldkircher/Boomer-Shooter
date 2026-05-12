@@ -1,22 +1,38 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerLifeSystem : MonoBehaviour
+public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
 {
-    [SerializeField] private int _maxLife = 3;
-    private int _life;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private float _ImortalityTime = 0.5f;
+    [SerializeField] private float _maxLife = 3;
+    [SerializeField] private Slider _lifeBar;
+    private float _ActualTime;
+    private float _life;
+
+    public void DamagePlayer(float damage)
+    {
+        if (_ActualTime > 0)
+            return;
+
+        _life -= damage;
+        Debug.Log(_life);
+        _ActualTime = _ImortalityTime;
+        if (_life > 0)
+            return;
+        Debug.Log("morreu");
+    }
+
     void Start()
     {
-        
+        _ActualTime =_ImortalityTime;
+       _life = _maxLife;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        
+        if (_ActualTime > 0)
+        {
+            _ActualTime -= Time.deltaTime;
+        }
     }
 }

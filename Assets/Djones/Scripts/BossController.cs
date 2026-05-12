@@ -38,7 +38,6 @@ public class BossController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-
         GameObject playerObj =
             GameObject.FindGameObjectWithTag("Player");
 
@@ -48,7 +47,6 @@ public class BossController : MonoBehaviour
         }
 
         thinkTimer = thinkRate;
-
         laserTimer = laserCooldown;
 
         if (laser != null)
@@ -201,10 +199,13 @@ public class BossController : MonoBehaviour
                 laser.SetPosition(1, hit.point);
                 GameObject blood = Instantiate(bloodEffect,laserPoint.position, Quaternion.LookRotation(laserPoint.position - transform.position));
 
-                if (hit.collider.CompareTag("Player"))
+
+                IStatusPlayer player = hit.collider.GetComponentInParent<IStatusPlayer>();
+                if (player != null)
                 {
-                    Debug.Log("Dano");
-                }
+                    player.DamagePlayer(2f);
+                }                
+                   
             }
             else
             {

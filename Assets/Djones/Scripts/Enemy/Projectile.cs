@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour, IProjectile
 {
     public float speed = 10f;
     public float lifeTime = 5f;
+    public float damage = 1;
 
     private Vector3 direction;
 
@@ -19,11 +20,15 @@ public class Projectile : MonoBehaviour, IProjectile
     {
         transform.position += direction * speed * Time.deltaTime;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-           Destroy(gameObject);
-        }
+          IStatusPlayer player = other.gameObject.GetComponentInChildren<IStatusPlayer>();
+          if (player == null)
+              return;
+ 
+          player.DamagePlayer(damage);
+          Destroy(gameObject);
     }
+
+
 }
