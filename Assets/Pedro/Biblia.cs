@@ -1,25 +1,15 @@
+using System.Collections;
 using UnityEngine;
 
 public class Biblia : MonoBehaviour
 {
+    [Header("Os serialize Fields")]
     [SerializeField] private GameObject _magic;
     [SerializeField] private Transform _magicBornPlaceInSpace;
-    public float detectionRange = 10f;
     private bool _isHeald = false;
     public bool collected = false;
-    public bool _isEnemyClose = true;
-    private Transform enemy;
-    void Start()
-    {
-        GameObject enemyObj = GameObject.FindGameObjectWithTag("Enemy");
+    public bool _spellRateWating = false;
 
-        if (enemyObj != null)
-        {
-            enemy = enemyObj.transform;
-        }
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (collected == false)
@@ -28,11 +18,22 @@ public class Biblia : MonoBehaviour
         if (_isHeald == false)
             return;
 
-        if (Input.GetButtonDown("Fire1") && _isEnemyClose == false)
+        if (_spellRateWating == true)
+            return;
+
+        if (Input.GetButtonDown("Fire1"))
         {
             Instantiate(_magic, _magicBornPlaceInSpace);
+            StartCoroutine(SpellRate());
+            _spellRateWating = true;
         }
     }
+    IEnumerator SpellRate()
+    {
+        yield return new WaitForSeconds(1.6f);
+        _spellRateWating = false;
+    }
+
     public void IsCurrentWeapon()
     {
         collected = true;

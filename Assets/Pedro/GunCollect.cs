@@ -5,6 +5,7 @@ public class GunCollect : Item
 {
     [SerializeField] private GunElement _attributes;
     [SerializeField] private UnityEvent _eventToWeaponToDisapear;
+    MeeleWeapon meele;
 
     public override Element Collect()
     {
