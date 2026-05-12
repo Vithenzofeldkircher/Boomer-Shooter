@@ -4134,6 +4134,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8584442848934694536, guid: 81c8b0c368006d4418f98362ca095340, type: 3}
+      propertyPath: _attributes._gunModel
+      value: 
+      objectReference: {fileID: 1265648731171219934, guid: c84de87f5f320dd438cf57556eb4c6a7, type: 3}
+    - target: {fileID: 8584442848934694536, guid: 81c8b0c368006d4418f98362ca095340, type: 3}
       propertyPath: _eventToWeaponToDisapear.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 667401161}
