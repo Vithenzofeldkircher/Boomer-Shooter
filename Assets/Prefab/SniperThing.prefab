@@ -130,7 +130,7 @@ MonoBehaviour:
     OnReload:
       m_PersistentCalls:
         m_Calls: []
-    _gunModel: {fileID: 0}
+    _gunModel: {fileID: 3492238240687994990, guid: c221f84f91f4d6046830c3b1d8fda354, type: 3}
     _name: Sniper
     _damage: 10
     _shootRate: 3

@@ -212,5 +212,9 @@ public class GunSystem : MonoBehaviour
     public void DisableShoot()
     {
         _canShoot = false;
+        if (_handGunModelParent.childCount > 0)
+        {
+            Destroy(_handGunModelParent.GetChild(0).gameObject);
+        }
     }
 }
