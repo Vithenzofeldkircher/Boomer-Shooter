@@ -193,9 +193,9 @@ public class GunSystem : MonoBehaviour
 
     public void ChangeGunVisual()
     {
-        if (_handGunModelParent.childCount > 1)
+        if (_handGunModelParent.childCount > 0)
         {
-            Destroy(_handGunModelParent.GetChild(1).gameObject);
+            Destroy(_handGunModelParent.GetChild(0).gameObject);
         }
 
         GameObject gun = Instantiate(_handGun.GunModel, _handGunModelParent);
