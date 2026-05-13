@@ -6,15 +6,11 @@ public class Biblia : MonoBehaviour
     [Header("Os serialize Fields")]
     [SerializeField] private GameObject _magic;
     [SerializeField] private Transform _magicBornPlaceInSpace;
-    private bool _isHeald = false;
-    public bool collected = false;
+    private bool _isHeald = true;
     public bool _spellRateWating = false;
 
     void Update()
     {
-        if (collected == false)
-            return;
-
         if (_isHeald == false)
             return;
 
@@ -36,7 +32,6 @@ public class Biblia : MonoBehaviour
 
     public void IsCurrentWeapon()
     {
-        collected = true;
         _isHeald = true;
     }
     public void IsNotCurrentWeapon()
