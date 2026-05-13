@@ -78,7 +78,7 @@ MonoBehaviour:
     _damage: 10
     _shootRate: 3
     _ammunation: 999
-    _clipSize: 1
+    _clipSize: 999
     _reloadTime: 3.5
     _hasScope: 1
   _eventToWeaponToDisapear:
