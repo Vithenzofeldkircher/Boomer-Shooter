@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
 {
     [SerializeField] private float _ImortalityTime = 0.5f;
@@ -12,8 +13,7 @@ public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
     [SerializeField] private Slider _lifeBar;
     private float _ActualTime;
     private float _life;
-    private bool _passCheckPoint;
-
+    [SerializeField] private GameObject _enemys;
     [SerializeField] private List<GameObject> _enemysList;
     public void DamagePlayer(float damage)
     {
@@ -36,9 +36,12 @@ public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
         _ActualTime =_ImortalityTime;
        _life = _maxLife;
     }
-
     void Update()
     {
+        _life = Mathf.Clamp(_life, 0, _maxLife);// limita a vida para menos q 0 
+        _lifeBar.value = _life;
+        _lifeBar.maxValue = _maxLife;
+
         if (_ActualTime > 0)
         {
             _ActualTime -= Time.deltaTime;
@@ -71,6 +74,7 @@ public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
     {
         if (!other.gameObject.CompareTag("Checkpoint"))
             return;
-         
+         _enemys.SetActive(false);
+        _life = _maxLife;
     }
 }

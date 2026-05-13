@@ -5,15 +5,19 @@ public class EnemyStatus : MonoBehaviour, IShootable
     [SerializeField] float _lifeMax = 2;
     private float _currentLife;
     private Vector3 _transform;
+    [SerializeField] private bool _boss;
+    [SerializeField] private GameObject _winPanel;
     public void Hitted(float damage)
     {
         _currentLife -= damage;
 
+        
         if (_currentLife > 0)
             return;
             
         print("Matou");
         transform.position = _transform;
+        _winPanel.SetActive(true);
         gameObject.SetActive(false);
     }
     public void Respawn()
