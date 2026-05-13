@@ -19,7 +19,7 @@ public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
         _ActualTime = _ImortalityTime;
         if (_life > 0)
             return;
-        Debug.Log("morreu");
+         transform.position = CheckPointManager.instance.GetCheckpoint();
     }
 
     void Start()
@@ -33,6 +33,10 @@ public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
         if (_ActualTime > 0)
         {
             _ActualTime -= Time.deltaTime;
+        }
+        if (Input.GetKeyDown(KeyCode.L)) 
+        { 
+         DamagePlayer(1.0f);
         }
     }
 }
