@@ -142,6 +142,7 @@ MonoBehaviour:
   visionDistance: 10
   pathPoints: []
   pointReachDistance: 0.5
+  damage: 1
 --- !u!195 &8676593717838681592
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -176,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9deed098f89e2434eb03d3357b54117b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
-  _lifeMax: 3
+  _lifeMax: 2
 --- !u!65 &6720364182069436187
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -217,8 +218,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5168195, y: 1.5452422, z: 1.7908859}
-  m_Center: {x: -0.11038995, y: 0.911477, z: 0.3427372}
+  m_Size: {x: 1.5168195, y: 0.82314605, z: 1.8476572}
+  m_Center: {x: -0.11038995, y: 0.550429, z: 0.37112284}
 --- !u!1 &6017290889132495426
 GameObject:
   m_ObjectHideFlags: 0

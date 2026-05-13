@@ -81,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b91187a9debded54988c89438ac8b3f6, type: 3}
       propertyPath: m_Name
-      value: Watcher_skin
+      value: flyingEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7692026817905738519, guid: b91187a9debded54988c89438ac8b3f6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -103,6 +103,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b91187a9debded54988c89438ac8b3f6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2593045942643161690}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b91187a9debded54988c89438ac8b3f6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3728324502940244636}
   m_SourcePrefab: {fileID: 100100000, guid: b91187a9debded54988c89438ac8b3f6, type: 3}
 --- !u!1 &476028805103427939 stripped
 GameObject:
@@ -162,7 +165,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
   _lifeMax: 2
-  _currentLife: 0
+--- !u!65 &3728324502940244636
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476028805103427939}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.3810141, z: 1}
+  m_Center: {x: 0, y: 0.19050705, z: 0}
 --- !u!4 &995542914437970905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b91187a9debded54988c89438ac8b3f6, type: 3}

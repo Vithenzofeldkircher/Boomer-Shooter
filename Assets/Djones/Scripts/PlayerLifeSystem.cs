@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
 {
     [SerializeField] private float _ImortalityTime = 0.5f;
     [SerializeField] private float _maxLife = 3;
+    [SerializeField] private GameObject _DeathPanel;
     [SerializeField] private Slider _lifeBar;
     private float _ActualTime;
     private float _life;
@@ -19,7 +22,10 @@ public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
         _ActualTime = _ImortalityTime;
         if (_life > 0)
             return;
-         transform.position = CheckPointManager.instance.GetCheckpoint();
+        _DeathPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        transform.position = CheckPointManager.instance.GetCheckpoint();
     }
 
     void Start()
@@ -38,5 +44,16 @@ public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
         { 
          DamagePlayer(1.0f);
         }
+    }
+    public void Respawn()
+    {
+        _life = _maxLife;
+        _DeathPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    public void Return(string scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 }

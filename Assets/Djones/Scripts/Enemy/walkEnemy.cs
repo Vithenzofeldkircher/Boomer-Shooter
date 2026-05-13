@@ -63,7 +63,9 @@ public class WalkEnemy : MonoBehaviour
 
         if (Physics.Raycast(transform.position, direction, out RaycastHit hit, visionDistance))
         {
-            if (hit.collider.CompareTag("Player"))
+            if (hit.collider.transform.parent == null) 
+                return;
+            if (hit.collider.transform.parent.CompareTag("Player"))
             {
                 IsChasing = true;
             }
