@@ -5,7 +5,6 @@ public class BibliaCollectable : MonoBehaviour
 {
     private Biblia biblia;
     [SerializeField] private UnityEvent bibliaCollected;
-    [SerializeField] private GunElement _attributes;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
