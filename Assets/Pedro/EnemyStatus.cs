@@ -16,6 +16,11 @@ public class EnemyStatus : MonoBehaviour, IShootable
         transform.position = _transform;
         gameObject.SetActive(false);
     }
+    public void Respawn()
+    {
+        transform.position = _transform;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

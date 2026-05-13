@@ -8,7 +8,6 @@ public class CheckPoint : MonoBehaviour
     {
         if (!other.CompareTag("Player"))
         return;
-        Debug.Log("player");
         CheckPointManager.instance.SetCheckpoint(respawnPoint.position);
     }
 }

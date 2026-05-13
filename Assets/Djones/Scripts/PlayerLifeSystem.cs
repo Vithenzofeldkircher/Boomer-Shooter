@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -7,11 +7,14 @@ public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
 {
     [SerializeField] private float _ImortalityTime = 0.5f;
     [SerializeField] private float _maxLife = 3;
+    [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _DeathPanel;
     [SerializeField] private Slider _lifeBar;
     private float _ActualTime;
     private float _life;
+    private bool _passCheckPoint;
 
+    [SerializeField] private List<GameObject> _enemysList;
     public void DamagePlayer(float damage)
     {
         if (_ActualTime > 0)
@@ -42,11 +45,19 @@ public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
         }
         if (Input.GetKeyDown(KeyCode.L)) 
         { 
-         DamagePlayer(1.0f);
+           DamagePlayer(1.0f);
         }
     }
     public void Respawn()
     {
+        _player.transform.position = CheckPointManager.instance.GetCheckpoint();
+        Debug.Log("teleport");
+        for (int i = 0; i < _enemysList.Count; i++)
+        {
+            _enemysList[i].SetActive(true);
+            EnemyStatus _enemy = _enemysList[i].GetComponent<EnemyStatus>();
+            _enemy.Respawn();
+        }
         _life = _maxLife;
         _DeathPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
@@ -55,5 +66,11 @@ public class PlayerLifeSystem : MonoBehaviour, IStatusPlayer
     public void Return(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Checkpoint"))
+            return;
+         
     }
 }
