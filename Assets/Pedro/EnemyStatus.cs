@@ -17,8 +17,12 @@ public class EnemyStatus : MonoBehaviour, IShootable
             
         print("Matou");
         transform.position = _transform;
-        _winPanel.SetActive(true);
         gameObject.SetActive(false);
+        if (_boss)
+        {
+            _winPanel.SetActive(true);
+        }
+
     }
     public void Respawn()
     {
